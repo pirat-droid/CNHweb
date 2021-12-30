@@ -23,10 +23,10 @@ class TagModel(models.Model):
     def get_absolute_url(self):
         return reverse('tag', kwargs={'url': self.slug})
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         self.slug = defaultfilters.slugify(unidecode(self.name))
-    #     return super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = defaultfilters.slugify(unidecode(self.name))
+        return super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'таг'
@@ -47,7 +47,6 @@ class PostModel(models.Model):
     tag = models.ForeignKey(TagModel,
                             on_delete=models.PROTECT,
                             verbose_name='таг')
-    text = models.TextField(verbose_name='Текст поста')
     datetime_create = models.DateTimeField(auto_now_add=True,
                                            db_index=True,
                                            verbose_name='Дата создания')
