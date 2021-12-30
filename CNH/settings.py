@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import authenticated
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9@qp--#-02dh9pk4%oop0c-zcm0*^k@)o5vmdl-v)mmcnh6sl6'
+SECRET_KEY = authenticated.django_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,10 +80,10 @@ WSGI_APPLICATION = 'CNH.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cnh',
-        'USER': 'postgres',
-        'PASSWORD': 'Dfkkf-123',
-        'HOST': '192.168.19.128',
+        'NAME': authenticated.db,
+        'USER': authenticated.db_user,
+        'PASSWORD': authenticated.db_password,
+        'HOST': authenticated.db_host,
     }
 }
 
