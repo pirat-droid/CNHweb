@@ -1,14 +1,14 @@
 from django.contrib import admin
-from blog.models import Post, Tag, ImagePost
+from blog.models import PostModel, TagModel, ImagePost
 
 
-@admin.register(Post)
+@admin.register(PostModel)
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'datetime_create', 'datetime_update']
     exclude = ['slug', ]
 
 
-@admin.register(Tag)
+@admin.register(TagModel)
 class TagAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     exclude = ['slug', ]
