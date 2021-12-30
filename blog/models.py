@@ -44,8 +44,7 @@ class PostModel(models.Model):
                             verbose_name='URL')
     title_i = models.ImageField(upload_to='post/title/%Y/%m/%d',
                                 verbose_name='Титульное изображение')
-    tag = models.ForeignKey(TagModel,
-                            on_delete=models.PROTECT,
+    tag = models.ManyToManyField(TagModel,
                             verbose_name='таг')
     datetime_create = models.DateTimeField(auto_now_add=True,
                                            db_index=True,

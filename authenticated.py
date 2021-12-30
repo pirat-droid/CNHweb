@@ -1,0 +1,5 @@
+db = 'cnh'
+db_user = 'postgres'
+db_password = 'Dfkkf-123'
+db_host = '192.168.19.128'
+django_key = 'django-insecure-9@qp--#-02dh9pk4%oop0c-zcm0*^k@)o5vmdl-v)mmcnh6sl6'
