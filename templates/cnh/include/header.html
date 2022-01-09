@@ -1,0 +1,156 @@
+{% load static %}
+
+<header class="header--section header--style-4">
+    <!-- Header Topbar Start -->
+    <div class="header--topbar bg--color-1">
+        <div class="container">
+            <div class="float--left float--xs-none text-xs-center">
+                <!-- Header Topbar Info Start -->
+                <ul class="header--topbar-info nav">
+                    {#                    <li><i class="fa fm fa-map-marker"></i>New York</li>#}
+{#                    <li><i class="fa fm fa-mixcloud"></i>#}
+{#                        <div class="weather-temperature"></div>#}
+{#                    </li>#}
+                    <li><span id="time"></span></li>
+                </ul>
+                <!-- Header Topbar Info End -->
+            </div>
+
+            <div class="float--right float--xs-none text-xs-center">
+                <!-- Header Topbar Social Start -->
+                <ul class="header--topbar-social nav hidden-sm hidden-xxs">
+                    <li><a href="https://t.me/CNHungry"><i class="fa fa-telegram"></i></a></li>
+                </ul>
+                <!-- Header Topbar Social End -->
+            </div>
+        </div>
+    </div>
+    <!-- Header Topbar End -->
+
+    <!-- Header Navbar Start -->
+    <div class="header--navbar navbar bd--color-1 bg--color-0" data-trigger="sticky">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#headerNav"
+                        aria-expanded="false" aria-controls="headerNav">
+                    <span class="sr-only">Навигация</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Header Logo Start -->
+                <div class="header--logo text-center">
+                    <h1 class="h1">
+                        <a href="{% url 'home' %}" class="btn-link">
+                            <img src={% static "img/logo.png" %} alt="USNews">
+                            <span class="hidden">CNHungry</span>
+                        </a>
+                    </h1>
+                </div>
+                <!-- Header Logo End -->
+            </div>
+
+            <div id="headerNav" class="navbar-collapse collapse">
+                <!-- Header Menu Links Start -->
+                <ul class="header--menu-links nav navbar-nav" data-trigger="hoverIntent">
+                    <li>
+                        <a href="{% url 'home' %}">Домой</a>
+                    </li>
+                    <li class="dropdown megamenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Теги<i
+                                class="fa flm fa-angle-down"></i></a>
+
+                        <ul class="dropdown-menu">
+                            {% for cat in category %}
+                                <li class="dropdown">
+
+                                    <a href="#">{{ cat.name }}</a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"></a></li>
+                                        {% for tag in cat.tag.all %}
+
+                                            <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></li>
+
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Авторы<i
+                                class="fa flm fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            {% for author in authors %}
+                                <li class="dropdown">
+                                    <a href="{{ author.get_absolute_url }}">{{ author.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'all-news' %}">Все новости</a>
+                    </li>
+                </ul>
+                <!-- Header Menu Links End -->
+            </div>
+        </div>
+    </div>
+    <!-- Header Navbar End -->
+</header>
+
+<script>
+    function currentTime() {
+        var date = new Date(); /* creating object of Date class */
+        var day = date.getDate();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var mnt = new Array("января", "февраля", "марта", "апреля", "мая",
+            "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря");
+        day = updateTime(day);
+        hour = updateTime(hour);
+        min = updateTime(min);
+        sec = updateTime(sec);
+        document.getElementById("time").innerText = ("Сейчас: " + hour + ":" + min + ":" + sec + "  /  " + day +
+            " " + mnt[date.getMonth()] + " " + date.getFullYear() + " г.")/* adding time to the div */
+        var t = setTimeout(function () {
+            currentTime()
+        }, 1000); /* setting timer */
+    }
+
+    function updateTime(k) {
+        if (k < 10) {
+            return "0" + k;
+        } else {
+            return k;
+        }
+    }
+
+    currentTime(); /* calling currentTime() function to initiate the process */
+
+</script>
+
+
+<script>
+
+    function getLocation() {
+        console.log('asdasd')
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            {# возвращаем Москов#}
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        {#вызываем аякс запрос делаем реквест с запросом погоды если погода норм возвращаем результат если нет то Москов#}
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+    }
+
+    getLocation();
+</script>

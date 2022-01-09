@@ -1,0 +1,134 @@
+{% load static %}
+{% load cnh_tags %}
+
+{% get_price as price %}
+
+<div class="main--sidebar col-md-4 col-sm-5 ptop--30 pbottom--30" data-sticky-content="true">
+    <div class="sticky-content-inner">
+        <!-- Trade Start -->
+        <div class="widget">
+            <div class="widget--title" data-ajax="tab">
+                <h2 class="h4">Курс валют</h2>
+            </div>
+            <div class="poll--widget" data-ajax-content="outer">
+                <ul class="nav" data-ajax-content="inner">
+                    <li class="title">
+                        <h3 class="h4">По данным сайта EXMO</h3>
+                    </li>
+                    <li class="options">
+                        <div class="parent-trade">
+                            <div class="chaild-trade" style="width: 50px">
+                                <span>
+                                    <img src="{% static "img/BTC.png" %}" alt="BITCOIN">
+                                </span>
+                            </div>
+                            <div class="chaild-trade">
+                                <p>{{ price.btc_usd }} $</p>
+                            </div>
+                            <div class="chaild-trade">
+                                <p>{{ price.btc_rub }} ₽</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="options">
+                        <div class="parent-trade">
+                            <div class="chaild-trade" style="width: 50px">
+                                <span>
+                                    <img src="{% static "img/ETH.png" %}" alt="ETHEREUM">
+                                </span>
+                            </div>
+                            <div class="chaild-trade">
+                                <p>{{ price.eth_usd }} $</p>
+                            </div>
+                            <div class="chaild-trade">
+                                <p>{{ price.eth_rub }} ₽</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Trade End -->
+
+        <!-- Tags Start -->
+        <div class="widget">
+            <div class="widget--title">
+                <h2 class="h4">ТЕГИ</h2>
+                <i class="icon fa fa-tags"></i>
+            </div>
+
+            <!-- Tags Widget Start -->
+            <div class="tags--widget style--1">
+                <ul class="nav">
+                    {% for category in category %}
+                        {% for tag in category.tag.all %}
+                            <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- Tags Widget End -->
+        </div>
+        <!-- Tags End -->
+
+        <!-- Widget Start -->
+        <div class="widget">
+            <div class="widget--title" data-ajax="tab">
+                <h2 class="h4">Авторы статей</h2>
+            </div>
+
+            <!-- List Widgets Start -->
+            <div class="list--widget list--widget-2" data-ajax-content="outer">
+                <!-- Post Items Start -->
+                <div class="post--items post--items-3">
+                    <ul class="nav" data-ajax-content="inner">
+                        {% for author in authors %}
+                            <li>
+                                <!-- Post Item Start -->
+                                <div class="post--item post--layout-3">
+                                    <div class="post--img"><a href="{{ author.get_absolute_url }}">
+                                                <span class="thumb"><img
+                                                        src={{ author.image.url }} alt=""></span></a>
+
+                                        <div class="post--info">
+                                            <div class="title">
+                                                <a href="{{ author.get_absolute_url }}"><h3>{{ author.name }}</h3></a>
+                                            </div>
+                                            <ul class="nav meta">
+                                                <li><span>{{ author.staff.name }}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Post Item End -->
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <!-- Preloader Start -->
+                    <div class="preloader bg--color-0--b" data-preloader="1">
+                        <div class="preloader--inner"></div>
+                    </div>
+                    <!-- Preloader End -->
+                </div>
+                <!-- Post Items End -->
+            </div>
+            <!-- List Widgets End -->
+        </div>
+        <!-- Widget End -->
+
+        <!-- Widget Start -->
+        <div class="widget">
+            <div class="widget--title">
+                <h2 class="h4">ПОДПИСКА</h2>
+                <i class="icon fa fa-envelope-open-o"></i>
+            </div>
+
+            <!-- Subscribe Widget Start -->
+            {% subscribe_form %}
+            <!-- Subscribe Widget End -->
+        </div>
+        <!-- Widget End -->
+
+    </div>
+</div>

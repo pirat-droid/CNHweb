@@ -1,0 +1,106 @@
+{% load static %}
+{% load cnh_tags %}
+
+{% get_last_news as last_news %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ==== Title ==== -->
+    <title>Crypto News Hungry - {{ title }}</title>
+
+    <!-- ==== jQuery Library ==== -->
+    <script src={% static "js/jquery-3.2.1.min.js" %}></script>
+
+    <!-- ==== Favicons ==== -->
+    <link rel="icon" href={% static "favicon.png" %} type="image/png">
+
+    <!-- ==== Google Font ==== -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700">
+
+    <!-- ==== Font Awesome ==== -->
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+
+    <!-- ==== Bootstrap Framework ==== -->
+    <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+
+    <!-- ==== Main Stylesheet ==== -->
+    <link rel="stylesheet" href={% static "style.css" %}>
+
+</head>
+<body>
+
+<!-- Preloader Start -->
+<div id="preloader">
+    <div class="preloader bg--color-1--b" data-preloader="1">
+        <div class="preloader--inner"></div>
+    </div>
+</div>
+<!-- Preloader End -->
+
+<!-- Wrapper Start -->
+<div class="wrapper">
+    <!-- Header Start -->
+    {% include 'cnh/include/header.html' %}
+    <!-- Header End -->
+
+    <!-- Last News Start -->
+    <div class="news--ticker">
+        <div class="container">
+            <div class="title">
+                <h2>Последние новости за 24 часа</h2>
+            </div>
+
+            <div class="news-updates--list" data-marquee="true">
+                <ul class="nav">
+                    {% for post in last_news %}
+                        <li>
+                            <h3 class="h3"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </h3>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Last News End -->
+
+    <!-- Block page start -->
+    <div class="main-content--section pbottom--30">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <!-- Block page End -->
+
+    <!-- Footer Section Start -->
+    {% include 'cnh/include/footer.html' %}
+    <!-- Footer Section End -->
+</div>
+<!-- Wrapper End -->
+
+<!-- Sticky Social Start -->
+{% include 'cnh/include/stickySocial.html' %}
+<!-- Sticky Social End -->
+
+<!-- Back To Top Button Start -->
+<div id="backToTop">
+    <a href="#"><i class="fa fa-angle-double-up"></i></a>
+</div>
+<!-- Back To Top Button End -->
+
+<!-- ==== Bootstrap Framework ==== -->
+<script src={% static "js/bootstrap.min.js" %}></script>
+
+<!-- ==== Marquee Plugin ==== -->
+<script src={% static "js/jquery.marquee.min.js" %}></script>
+
+<!-- ==== Main JavaScript ==== -->
+<script src={% static "js/main.js" %}></script>
+
+</body>
+</html>

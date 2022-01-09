@@ -1,0 +1,140 @@
+<div class="main--content">
+                <!-- Post Items Start -->
+                <div class="post--items post--items-1 pd--30-0">
+                    <div class="row gutter--15">
+                        <div class="col-md-3">
+                            <div class="row gutter--15">
+                                <div class="col-md-12 col-xs-6 col-xxs-12">
+                                    <!-- Post Item Start -->
+                                    <div class="post--item post--layout-1 post--title-large">
+                                        <div class="post--img">
+                                            <a href="{{ last_news.0.get_absolute_url }}" class="thumb"><img
+                                                    src={{ last_news.0.title_i.url }} alt=""></a>
+                                            <a href="{{ last_news.0.tag.first.get_absolute_url }}" class="cat">{{ last_news.0.tag.first.name }}</a>
+
+
+                                            <div class="post--info">
+                                                <ul class="nav meta">
+                                                    <li><a href="{{ last_news.0.author.get_absolute_url }}">{{ last_news.0.author.name }}</a></li>
+                                                    <li><a href="{{ last_news.0.get_absolute_url }}">{{ last_news.0.datetime_create }}</a></li>
+                                                </ul>
+
+                                                <div class="title">
+                                                    <h2 class="h4"><a href="{{ last_news.0.get_absolute_url }}"
+                                                                      class="btn-link">{{ last_news.0.title|truncatechars:25 }}</a>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Post Item End -->
+                                </div>
+
+                                <div class="col-md-12 col-xs-6 hidden-xxs">
+                                    <!-- Post Item Start -->
+                                    <div class="post--item post--layout-1 post--title-large">
+                                        <div class="post--img">
+                                            <a href="{{ last_news.1.get_absolute_url }}" class="thumb"><img
+                                                    src={{ last_news.1.title_i.url }} alt=""></a>
+                                            <a href="{{ last_news.1.tag.first.get_absolute_url }}" class="cat">{{ last_news.1.tag.first.name }}</a>
+
+                                            <div class="post--info">
+                                                <ul class="nav meta">
+                                                    <li><a href="{{ last_news.1.author.get_absolute_url }}">{{ last_news.1.author.name }}</a></li>
+                                                    <li><a href="{{ last_news.1.get_absolute_url }}">{{ last_news.1.datetime_create }}</a></li>
+                                                </ul>
+
+                                                <div class="title">
+                                                    <h2 class="h4"><a href="{{ last_news.1.get_absolute_url }}"
+                                                                      class="btn-link">{{ last_news.1.title|truncatechars:25 }}</a>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Post Item End -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Post Item Start -->
+                            <div class="post--item post--layout-1 post--title-larger">
+                                <div class="post--img">
+                                    <a href="{{ last_news.2.get_absolute_url }}" class="thumb"><img
+                                            src={{ last_news.2.title_i.url }} alt=""></a>
+                                    <a href="{{ last_news.2.tag.first.get_absolute_url }}" class="cat">{{ last_news.2.tag.first.name }}</a>
+
+                                    <div class="post--info">
+                                        <ul class="nav meta">
+                                            <li><a href="{{ last_news.2.author.get_absolute_url }}">{{ last_news.2.author.name }}</a></li>
+                                            <li><a href="{{ last_news.2.get_absolute_url }}">{{ last_news.2.datetime_create }}</a></li>
+                                        </ul>
+
+                                        <div class="title">
+                                            <h2 class="h4"><a href="{{ last_news.2.get_absolute_url }}"
+                                                              class="btn-link">{{ last_news.2.title }}</a></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Post Item End -->
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row gutter--15">
+                                <div class="col-md-12 col-xs-6 col-xxs-12">
+                                    <!-- Post Item Start -->
+                                    <div class="post--item post--layout-1 post--title-large">
+                                        <div class="post--img">
+                                            <a href="{{ last_news.3.get_absolute_url }}" class="thumb"><img
+                                                    src={{ last_news.3.title_i.url }} alt=""></a>
+                                            <a href="{{ last_news.3.tag.first.get_absolute_url }}" class="cat">{{ last_news.3.tag.first.name }}</a>
+
+                                            <div class="post--info">
+                                                <ul class="nav meta">
+                                                    <li><a href="{{ last_news.3.author.get_absolute_url }}">{{ last_news.3.author.name }}</a></li>
+                                                    <li><a href="{{ last_news.3.get_absolute_url }}">{{ last_news.3.datetime_create }}</a></li>
+                                                </ul>
+
+                                                <div class="title">
+                                                    <h2 class="h4"><a href="{{ last_news.3.get_absolute_url }}"
+                                                                      class="btn-link">{{ last_news.3.title|truncatechars:25 }}</a>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Post Item End -->
+                                </div>
+
+                                <div class="col-md-12 col-xs-6 hidden-xxs">
+                                    <!-- Post Item Start -->
+                                    <div class="post--item post--layout-1 post--title-large">
+                                        <div class="post--img">
+                                            <a href="{{ last_news.4.get_absolute_url }}" class="thumb"><img
+                                                    src={{ last_news.4.title_i.url }} alt=""></a>
+                                            <a href="{{ last_news.4.tag.first.get_absolute_url }}" class="cat">{{ last_news.4.tag.first.name }}</a>
+
+                                            <div class="post--info">
+                                                <ul class="nav meta">
+                                                    <li><a href="{{ last_news.4.author.get_absolute_url }}">{{ last_news.4.author.name }}</a></li>
+                                                    <li><a href="{{ last_news.4.get_absolute_url }}">{{ last_news.4.datetime_create }}</a></li>
+                                                </ul>
+
+                                                <div class="title">
+                                                    <h2 class="h4"><a href="{{ last_news.4.get_absolute_url }}"
+                                                                      class="btn-link">{{ last_news.4.title|truncatechars:25 }}</a>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Post Item End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Post Items End -->
+            </div>

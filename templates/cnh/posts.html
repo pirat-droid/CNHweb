@@ -1,0 +1,106 @@
+{% extends 'cnh/index.html' %}
+{% block content %}
+
+    <!-- Breadcrumb Start -->
+    <div class="main--breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="{% url 'home' %}" class="btn-link"><i class="fa fm fa-home"></i>Home</a></li>
+                <li class="active"><span>Все новости</span></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Main Content Start -->
+    <div class="main-content--section pbottom--30">
+        <div class="container">
+            <div class="row" style="transform: none;">
+
+                <div class="main--content col-md-8 col-sm-7" data-sticky-content="true"
+                     style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+                    <div class="sticky-content-inner"
+                         style="padding-top: 1px; padding-bottom: 1px; position: static; transform: none;">
+
+                        <!-- Post Start -->
+                        <div class="post--items post--items-5 pd--30-0">
+                            <ul class="nav">
+                                {% for post in object_list %}
+                                    <li>
+
+                                        <div class="post--item post--title-larger">
+                                            <div class="row">
+                                                <div class="col-md-4 col-sm-12 col-xs-4 col-xxs-12">
+                                                    <div class="post--img">
+                                                        <a href="{{ post.get_absolute_url }}" class="thumb"><img
+                                                                src="{{ post.title_i.url }}" alt="" data-rjs="2"></a>
+                                                        <a href="{{ post.tag.first.get_absolute_url }}"
+                                                           class="cat">{{ post.tag.first.name }}</a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8 col-sm-12 col-xs-8 col-xxs-12">
+                                                    <div class="post--info">
+                                                        <ul class="nav meta">
+                                                            <li>
+                                                                <a href="{{ post.author.get_absolute_url }}">{{ post.author.name }}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ post.get_absolute_url }}">{{ post.datetime_create }}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ post.get_absolute_url }}">{{ post.time_read }}
+                                                                    мин. чтения</a></li>
+                                                        </ul>
+
+                                                        <div class="title">
+                                                            <h3 class="h4"><a href="{{ post.get_absolute_url }}"
+                                                                              class="btn-link">{{ post.title }}</a></h3>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="post--content">
+                                                        <p>{{ post.paragraph.first.text }}</p>
+                                                    </div>
+
+                                                    <div class="post--action">
+                                                        <a href="{{ post.get_absolute_url }}">Читать дальше...</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- Post End -->
+
+                        <!-- Pagination Start -->
+                        {% if is_paginated %}
+                            {% include 'cnh/include/pagination.html' %}
+                        {% endif %}
+                        <!-- Pagination End -->
+
+                        <div class="resize-sensor"
+                             style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;">
+                            <div class="resize-sensor-expand"
+                                 style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
+                                <div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 790px; height: 3134px;"></div>
+                            </div>
+                            <div class="resize-sensor-shrink"
+                                 style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
+                                <div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Sidebar Start -->
+                {% include 'cnh/include/sidebar.html' %}
+                <!-- Main Sidebar End -->
+            </div>
+        </div>
+    </div>
+    <!-- Main Content End -->
+{% endblock %}

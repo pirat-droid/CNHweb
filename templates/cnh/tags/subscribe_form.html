@@ -1,0 +1,17 @@
+<div class="subscribe--widget">
+                <div class="content">
+                    <p>Подпишитесь на нашу рассылку, чтобы получать последние новости.</p>
+                </div>
+
+                <form action="{% url 'subscribe' %}" method="post">
+                    {% csrf_token %}
+                    {{ subscribe_form }}
+{#                    <input type="email" name="EMAIL" placeholder="E-mail address" class="form-control"#}
+{#                           autocomplete="off" required>#}
+
+                    <button type="submit" class="btn btn-lg btn-block btn-default active">Подписаться
+                    </button>
+
+                    <div class="status"></div>
+                </form>
+            </div>

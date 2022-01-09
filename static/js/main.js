@@ -1,13 +1,3 @@
-/*
-
-[Main Script]
-
-Project     : USNews - Multipurpose News, Magazine and Blog HTML5 Template
-Author      : themelooks.com
-Author URI  : https://themeforest.net/user/themelooks
-
-*/
-
 ;(function ($) {
     "use strict";
     
@@ -24,7 +14,7 @@ Author URI  : https://themeforest.net/user/themelooks
          * BACKGROUND IMAGE
          * ------------------------------------------------------------------------- */
         var $bgImg = $('[data-bg-img]');
-        
+
         $bgImg.each(function () {
             var $t = $(this);
 
@@ -32,24 +22,6 @@ Author URI  : https://themeforest.net/user/themelooks
               .addClass('bg--img')
               .attr('data-rjs', 2)
               .removeAttr('data-bg-img');
-        });
-
-        /* ------------------------------------------------------------------------- *
-         * RETINAJS
-         * ------------------------------------------------------------------------- */
-        $('img').attr('data-rjs', 2);
-
-        retinajs();
-        
-        /* ------------------------------------------------------------------------- *
-         * STICKY
-         * ------------------------------------------------------------------------- */
-        var $sticky = $('[data-trigger="sticky"]');
-        
-        $sticky.each(function () {
-            $(this).sticky({
-                zIndex: 999
-            });
         });
 
         /* ------------------------------------------------------------------------- *
@@ -255,23 +227,6 @@ Author URI  : https://themeforest.net/user/themelooks
                 });
         }
         
-        /* ------------------------------------------------------------------------- *
-         * HOVER INTENT
-         * ------------------------------------------------------------------------- */
-        var $hoverIntent = $('[data-trigger="hoverIntent"]');
-        
-        $hoverIntent.hoverIntent({
-            selector: 'li.dropdown',
-            over: function () {
-                $(this).addClass('open');
-            },   
-            out: function () {
-                $(this).removeClass('open');
-            },
-            timeout: 200,
-            interval: 200
-        });
-        
         /* -------------------------------------------------------------------------*
          * COUNTDOWN
          * -------------------------------------------------------------------------*/
@@ -417,17 +372,6 @@ Author URI  : https://themeforest.net/user/themelooks
                 });
             }, 200);
         });
-
-        /* ------------------------------------------------------------------------- *
-         * STICKY CONTENT
-         * ------------------------------------------------------------------------- */
-        var $stickyContent = $('[data-sticky-content="true"]');
-
-        if ( $stickyContent.length ) {
-            $stickyContent.theiaStickySidebar({
-                additionalMarginTop: $headerNavbar.length ? $headerNavbar.outerHeight() : 0
-            });
-        }
 
         /* ------------------------------------------------------------------------- *
          * MAP
@@ -671,18 +615,6 @@ Author URI  : https://themeforest.net/user/themelooks
 
         isBodyScrolling();
         $wn.on('scroll', isBodyScrolling);
-
-        /* ------------------------------------------------------------------------- *
-         * ADJUST ROW
-         * ------------------------------------------------------------------------- */
-        var $adjustRow = $('.AdjustRow');
-        
-        if ( $adjustRow.length ) {
-            $adjustRow.isotope({
-                originLeft: isRTL ? false : true,
-                layoutMode: 'fitRows'
-            });
-        }
 
         /* ------------------------------------------------------------------------- *
          * DROPDOWN MENU

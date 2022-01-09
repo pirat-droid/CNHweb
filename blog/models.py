@@ -4,10 +4,29 @@ from unidecode import unidecode
 from django.template import defaultfilters
 
 
+class CategoryTagModel(models.Model):
+    name = models.CharField(max_length=50,
+                            verbose_name='Название категории')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категория тегов'
+        verbose_name_plural = 'Категории тегов'
+        ordering = ['name']
+
+
 class TagModel(models.Model):
     name = models.CharField(max_length=50,
                             unique=True,
                             verbose_name='Название тега')
+    category = models.ForeignKey(CategoryTagModel,
+                                 on_delete=models.CASCADE,
+                                 verbose_name='Категория',
+                                 related_name='tag',
+                                 null=True,
+                                 blank=True)
     slug = models.SlugField(max_length=50,
                             unique=True,
                             verbose_name='URL')
@@ -23,10 +42,10 @@ class TagModel(models.Model):
     def get_absolute_url(self):
         return reverse('tag', kwargs={'url': self.slug})
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = defaultfilters.slugify(unidecode(self.name))
-        return super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = defaultfilters.slugify(unidecode(self.name))
+    #     return super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'таг'
@@ -44,8 +63,13 @@ class PostModel(models.Model):
                             verbose_name='URL')
     title_i = models.ImageField(upload_to='post/title/%Y/%m/%d',
                                 verbose_name='Титульное изображение')
+    time_read = models.TextField(max_length=2,
+                                 verbose_name='Время на чтение')
     tag = models.ManyToManyField(TagModel,
                             verbose_name='таг')
+    author = models.ForeignKey("AuthorModel",
+                               on_delete=models.CASCADE,
+                               verbose_name="Автор поста")
     datetime_create = models.DateTimeField(auto_now_add=True,
                                            db_index=True,
                                            verbose_name='Дата создания')
@@ -55,7 +79,7 @@ class PostModel(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        ordering = ['datetime_create', ]
+        ordering = ['-datetime_create', ]
 
     def __str__(self):
         return self.title
@@ -69,29 +93,12 @@ class PostModel(models.Model):
         return super().save(*args, **kwargs)
 
 
-class ImagePost(models.Model):
-    post = models.ForeignKey(PostModel,
-                             on_delete=models.CASCADE,
-                             verbose_name='Пост')
-    image = models.ImageField(upload_to='post/image/%Y/%m/%d',
-                              verbose_name='Путь хранения')
-    datetime_create = models.DateTimeField(auto_now_add=True,
-                                           db_index=True,
-                                           verbose_name='Дата создания')
-    datetime_update = models.DateTimeField(auto_now=True,
-                                           verbose_name='Дата изменения')
-
-    class Meta:
-        verbose_name = 'Фото'
-        verbose_name_plural = 'Фото'
-
-    def __str__(self):
-        return self.post.title
-
-
 class AuthorModel(models.Model):
     name = models.CharField(max_length=100,
                             verbose_name='ФИО автора')
+    image = models.ImageField(upload_to='author/image',
+                              verbose_name='фото аналитика')
+    biography = models.TextField(verbose_name='Биография')
     staff = models.ForeignKey('StaffModel',
                               on_delete=models.PROTECT,
                               verbose_name='Должность')
@@ -123,11 +130,12 @@ class AuthorModel(models.Model):
 
 class StaffModel(models.Model):
     name = models.CharField(max_length=100,
-                            verbose_name='ФИО автора')
+                            verbose_name='Должность')
     slug = models.SlugField(max_length=100,
                             unique=True,
                             db_index=True,
-                            verbose_name='URL')
+                            verbose_name='URL',
+                            blank=True)
     datetime_create = models.DateTimeField(auto_now_add=True,
                                            db_index=True,
                                            verbose_name='Дата создания')
@@ -153,7 +161,8 @@ class StaffModel(models.Model):
 class ParagraphModel(models.Model):
     post = models.ForeignKey(PostModel,
                              on_delete=models.CASCADE,
-                             verbose_name='Пост')
+                             verbose_name='Пост',
+                             related_name='paragraph')
     text = models.TextField(verbose_name='Текст')
     datetime_create = models.DateTimeField(auto_now_add=True,
                                            db_index=True,
@@ -168,11 +177,11 @@ class ParagraphModel(models.Model):
     def __str__(self):
         return self.post.title
 
-
 class CitationModel(models.Model):
     paragraph = models.ForeignKey(ParagraphModel,
                              on_delete=models.CASCADE,
-                             verbose_name='Параграф')
+                             verbose_name='Параграф',
+                             related_name='quo')
     text = models.TextField(verbose_name='Текст')
     datetime_create = models.DateTimeField(auto_now_add=True,
                                            db_index=True,
@@ -188,12 +197,8 @@ class CitationModel(models.Model):
         return self.paragraph.post.title
 
 
-class CitationModel(models.Model):
-    paragraph = models.ForeignKey(ParagraphModel,
-                             on_delete=models.CASCADE,
-                             verbose_name='Параграф')
-    image = models.ImageField(upload_to='post/paragraph/image/%Y/%m/%d',
-                              verbose_name='Путь хранения')
+class SubscribeModel(models.Model):
+    email = models.EmailField(db_index=True)
     datetime_create = models.DateTimeField(auto_now_add=True,
                                            db_index=True,
                                            verbose_name='Дата создания')
@@ -201,10 +206,11 @@ class CitationModel(models.Model):
                                            verbose_name='Дата изменения')
 
     class Meta:
-        verbose_name = 'Цитата'
-        verbose_name_plural = 'Цитаты'
+        verbose_name = 'Подписчик'
+        verbose_name_plural = 'Подписчики'
 
     def __str__(self):
-        return self.paragraph.post.title
+        return self.email
+
 
 
